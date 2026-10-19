@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: paytask-demo
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    healthCheckPath: /
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: MPESA_MODE
+        value: demo
+      - key: PAYTASK_ADMIN_USER
+        sync: false
+      - key: PAYTASK_ADMIN_PASSWORD
+        sync: false
